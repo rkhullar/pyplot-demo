@@ -12,6 +12,7 @@ import inspect
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
+from matplotlib import style
 from matplotlib.dates import strpdate2num
 
 myname = lambda: inspect.stack()[1][3]
@@ -143,6 +144,13 @@ def test11():
 
     plt.subplots_adjust(bottom=0.20)
 
+# stylesheets
+def test12():
+    style.use('ggplot')
+    print style.available
+    plt.plot([1,2,3,4,5,6,7,8],[50,45,30,55,40,30,45,50],label=myname())
+
+
 if __name__ == '__main__':
     #test01()
     #test02()
@@ -154,5 +162,6 @@ if __name__ == '__main__':
     #test08()
     #test09()
     #test10()
-    test11()
+    #test11()
+    test12()
     finalize(axis=1, legend=1)
