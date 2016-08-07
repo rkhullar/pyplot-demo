@@ -12,7 +12,7 @@ import inspect
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
-from matplotlib import style
+from matplotlib import style, animation
 from matplotlib.dates import strpdate2num
 
 myname = lambda: inspect.stack()[1][3]
@@ -150,6 +150,26 @@ def test12():
     print style.available
     plt.plot([1,2,3,4,5,6,7,8],[50,45,30,55,40,30,45,50],label=myname())
 
+# animation
+def test13():
+    style.use('fivethirtyeight')
+    fig = plt.figure()
+    ax1 = fig.add_subplot(1,1,1)
+    def animate(i):
+        x = []
+        y = []
+        with open('data/example.csv', 'r') as file:
+            for line in file:
+                if line.strip():
+                    t = line.split(';')
+                    x.append(int(t[0]))
+                    y.append(int(t[1]))
+        ax1.clear()
+        ax1.plot(x,y)
+    ani = animation.FuncAnimation(fig, animate, interval=1000)
+    plt.show()
+
+
 
 if __name__ == '__main__':
     #test01()
@@ -163,5 +183,6 @@ if __name__ == '__main__':
     #test09()
     #test10()
     #test11()
-    test12()
+    #test12()
+    test13()
     finalize(axis=1, legend=1)
